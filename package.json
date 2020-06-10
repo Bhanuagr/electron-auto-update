@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "electron-auto-update-example",
   "main": "main.js",
   "scripts": {
@@ -15,7 +15,11 @@
     "build": "electron-builder build -p never",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": {
+    "name": "Bhanu Agrawal",
+    "email": "bhanuagrawal2018@gmail.com",
+    "url": "http://electron-update-example.com/"
+  },
   "license": "ISC",
   "devDependencies": {
     "electron": "^9.0.2",
@@ -44,7 +48,8 @@
     "linux": {
       "icon": "build/icons/icon-512x512.png",
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb"
       ]
     },
     "win": {
