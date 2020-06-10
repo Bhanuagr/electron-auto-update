@@ -1,12 +1,18 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "electron-auto-update-example",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder build --linux --publish never",
-    "deploy": "electron-builder build --linux --publish always",
+    "deploy": "electron-builder build --linux AppImage --publish always",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build:Win": "electron-builder --win",
+    "ship": "build",
+    "electron-packager": "electron-packager ./ --all.",
+    "publish": "electron-builder build -p always",
+    "build": "electron-builder build -p never",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -20,6 +26,37 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/agbhanu/electron-auto-update.git"
+    "url": "https://github.com/Bhanuagr/electron-auto-update.git"
+  },
+  "build": {
+    "appId": "com.electron.auto-update",
+    "files": [
+      "**/*",
+      "build",
+      "dist"
+    ],
+    "directories": {
+      "buildResources": "build/icons"
+    },
+    "mac": {
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    },
+    "linux": {
+      "icon": "build/icons/icon-512x512.png",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "win": {
+      "target": "NSIS"
+    },
+    "publish": {
+      "provider": "github",
+      "repo": "electron-auto-update",
+      "owner": "Bhanuagr"
+    }
   }
 }
