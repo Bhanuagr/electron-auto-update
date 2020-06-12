@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "electron-auto-update-example",
   "main": "main.js",
   "scripts": {
@@ -29,10 +29,6 @@
     "electron-log": "^4.2.1",
     "electron-updater": "^4.3.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Bhanuagr/electron-auto-update.git"
-  },
   "build": {
     "appId": "com.electron.auto-update",
     "files": [
@@ -59,7 +55,9 @@
     "publish": {
       "provider": "github",
       "repo": "electron-auto-update",
-      "owner": "Bhanuagr"
+      "owner": "Bhanuagr",
+      "private": true,
+      "token": "ddd874f8b6da358eb2a6118d2238978edf1dfb3e"
     }
   }
 }

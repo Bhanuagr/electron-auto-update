@@ -4,10 +4,11 @@ const logger = require("electron-log");
 
 let mainWindow;
 
-logger.transports.file.level = "debug"
-autoUpdater.logger = logger
+autoUpdater.logger = logger;
+autoUpdater.logger.transports.file.level = 'info';
+logger.info('App starting...');
 
-autoUpdater.autoDownload = true;
+// autoUpdater.autoDownload = true;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -29,6 +30,7 @@ function createWindow() {
 
 app.on("ready", () => {
   createWindow();
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on("window-all-closed", function () {
