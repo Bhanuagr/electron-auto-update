@@ -1,8 +1,13 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const { autoUpdater } = require("electron-updater");
-const log = require("electron-log");
+const logger = require("electron-log");
 
 let mainWindow;
+
+logger.transports.file.level = "debug"
+autoUpdater.logger = logger
+
+autoUpdater.autoDownload = true;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -47,9 +52,22 @@ ipcMain.on("restart_app", () => {
 });
 
 autoUpdater.on("update-available", () => {
+  dialog.showMessageBox({
+    message: `update available`,
+  });
   mainWindow.webContents.send("update_available");
 });
 
 autoUpdater.on("update-downloaded", () => {
+  dialog.showMessageBox({
+    message: `update downloaded`,
+  });
   mainWindow.webContents.send("update_downloaded");
+});
+
+autoUpdater.on("error", (error) => {
+  dialog.showMessageBox({
+    message: `error while updating ${error}`,
+  });
+  autoUpdater.logger.debug(error);
 });
