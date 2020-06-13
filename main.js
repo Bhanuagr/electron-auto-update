@@ -4,7 +4,6 @@ const logger = require("electron-log");
 
 let mainWindow;
 
-AppUpdater.autoDownload = false;
 // autoUpdater.autoDownload = false;
 // autoUpdater.logger = logger;
 // autoUpdater.logger.transports.file.level = "info";
@@ -23,14 +22,15 @@ function createWindow() {
     mainWindow = null;
   });
 
-  mainWindow.once("ready-to-show", () => {
-    autoUpdater.checkForUpdatesAndNotify();
-  });
+  // mainWindow.once("ready-to-show", () => {
+  //   autoUpdater.checkForUpdatesAndNotify();
+  // });
 }
 
 app.on("ready", () => {
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+
+  autoUpdateConfig();
 });
 
 app.on("window-all-closed", function () {
@@ -53,37 +53,44 @@ ipcMain.on("restart_app", () => {
   autoUpdater.quitAndInstall();
 });
 
-autoUpdater.on("update-available", () => {
-  dialog.showMessageBox({
-    message: `update available`,
-  });
-  mainWindow.webContents.send("update_available");
-});
+const autoUpdateConfig = () => {
+  // AppUpdater.autoDownload = false;
+  // autoUpdater.autoDownload = false;
 
-autoUpdater.on("download-progress", (progressObj) => {
-  let log_message = "Download speed: " + progressObj.bytesPerSecond;
-  log_message = log_message + " - Downloaded " + progressObj.percent + "%";
-  log_message =
-    log_message +
-    " (" +
-    progressObj.transferred +
-    "/" +
-    progressObj.total +
-    ")";
-  dialog.showMessageBox({
-    message: log_message,
+  autoUpdater.on("update-available", () => {
+    dialog.showMessageBox({
+      message: `update available`,
+    });
+    mainWindow.webContents.send("update_available");
   });
-});
 
-autoUpdater.on("update-downloaded", () => {
-  dialog.showMessageBox({
-    message: `update downloaded`,
+  autoUpdater.on("download-progress", (progressObj) => {
+    let log_message = "Download speed: " + progressObj.bytesPerSecond;
+    log_message = log_message + " - Downloaded " + progressObj.percent + "%";
+    log_message =
+      log_message +
+      " (" +
+      progressObj.transferred +
+      "/" +
+      progressObj.total +
+      ")";
+    dialog.showMessageBox({
+      message: log_message,
+    });
   });
-  mainWindow.webContents.send("update_downloaded");
-});
 
-autoUpdater.on("error", (error) => {
-  dialog.showMessageBox({
-    message: `error while updating ${error}`,
+  autoUpdater.on("update-downloaded", () => {
+    dialog.showMessageBox({
+      message: `update downloaded`,
+    });
+    mainWindow.webContents.send("update_downloaded");
   });
-});
+
+  autoUpdater.on("error", (error) => {
+    dialog.showMessageBox({
+      message: `error while updating ${error}`,
+    });
+  });
+
+  autoUpdater.checkForUpdates();
+};
