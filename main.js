@@ -1,13 +1,14 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { autoUpdater } = require("electron-updater");
+const { autoUpdater, AppUpdater } = require("electron-updater");
 const logger = require("electron-log");
 
 let mainWindow;
 
-autoUpdater.autoDownload = false;
-autoUpdater.logger = logger;
-autoUpdater.logger.transports.file.level = "info";
-logger.info("App starting...");
+AppUpdater.autoDownload = false;
+// autoUpdater.autoDownload = false;
+// autoUpdater.logger = logger;
+// autoUpdater.logger.transports.file.level = "info";
+// logger.info("App starting...");
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -85,5 +86,4 @@ autoUpdater.on("error", (error) => {
   dialog.showMessageBox({
     message: `error while updating ${error}`,
   });
-  autoUpdater.logger.debug(error);
 });
