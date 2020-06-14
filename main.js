@@ -3,6 +3,7 @@ const { autoUpdater } = require("electron-updater");
 const logger = require("electron-log");
 
 let mainWindow;
+autoUpdater.autoDownload = false;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
