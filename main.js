@@ -75,7 +75,7 @@ autoUpdater.on("update-available", (info) => {
   //   message: `update available`,
   // });
   // manualUpdate();
-  mainWindow.webContents.send("update_available");
+  // mainWindow.webContents.send("update_available");
 });
 
 // autoUpdater.on("download-progress", (progressObj) => {
@@ -97,7 +97,7 @@ autoUpdater.on("update-downloaded", () => {
   dialog.showMessageBox({
     message: `update downloaded`,
   });
-  mainWindow.webContents.send("update_downloaded");
+  // mainWindow.webContents.send("update_downloaded");
 });
 
 autoUpdater.on("error", (error) => {
