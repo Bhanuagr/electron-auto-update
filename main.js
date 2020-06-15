@@ -95,9 +95,22 @@ autoUpdater.on("update-available", (info) => {
 // });
 
 autoUpdater.on("update-downloaded", () => {
-  dialog.showMessageBox({
-    message: `update downloaded`,
+  const options = {
+    type: "question",
+    title: "Restart App",
+    message: `Do you want to restart now`,
+    buttons: ["Restart", "Close"],
+  };
+
+  dialog.showMessageBox(options).then((result) => {
+    if (result.response === 0) {
+      autoUpdater.quitAndInstall();
+    }
   });
+
+  // dialog.showMessageBox({
+  //   message: `update downloaded`,
+  // });
   // mainWindow.webContents.send("update_downloaded");
 });
 
