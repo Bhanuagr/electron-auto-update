@@ -60,15 +60,21 @@ ipcMain.on("restart_app", () => {
 
 autoUpdater.on("update-available", (info) => {
   const options = {
-    type: "info",
-    title: "Upgrade App",
-    message: `App:${info.version}\n${info.remark}`,
-    buttons: ["upgrade now", "ask me later"],
+    type: "question",
+    title: "App Update",
+    message: `Version: ${info.version}`,
+    buttons: ["Upgrade now", "Ask me later"],
   };
   dialog.showMessageBox(options, function (index) {
     if (index === 0) {
+      dialog.showMessageBox({
+        message: `inside if block`,
+      });
       manualUpdate();
     }
+    dialog.showMessageBox({
+      message: `outside: ${JSON.stringify(index)}`,
+    });
   });
 
   // dialog.showMessageBox({
