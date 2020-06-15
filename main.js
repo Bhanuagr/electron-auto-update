@@ -20,7 +20,7 @@ function createWindow() {
   });
 
   mainWindow.once("ready-to-show", () => {
-    autoUpdater.checkForUpdatesAndNotify();
+    autoUpdater.checkForUpdates();
   });
 }
 
@@ -34,7 +34,7 @@ function manualUpdate() {
 app.on("ready", () => {
   createWindow();
 
-  autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdates();
   // autoUpdateConfig();
 });
 
