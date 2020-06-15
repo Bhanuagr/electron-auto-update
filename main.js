@@ -1,8 +1,11 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { autoUpdater } = require("electron-updater");
+const { autoUpdater, CancellationToken } = require("electron-updater");
+const ProgressBar = require("electron-progressbar");
 const logger = require("electron-log");
 
 let mainWindow;
+let progressBar;
+const cancellationToken = new CancellationToken();
 autoUpdater.autoDownload = false;
 // const cancellationToken = new CancellationToken();
 
@@ -18,17 +21,13 @@ function createWindow() {
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
-
-  mainWindow.once("ready-to-show", () => {
-    autoUpdater.checkForUpdates();
-  });
 }
 
 function manualUpdate() {
   dialog.showMessageBox({
     message: `manual updated started`,
   });
-  autoUpdater.downloadUpdate();
+  autoUpdater.downloadUpdate(cancellationToken);
 }
 
 app.on("ready", () => {
@@ -68,7 +67,20 @@ autoUpdater.on("update-available", (info) => {
 
   dialog.showMessageBox(options).then((result) => {
     if (result.response === 0) {
-      manualUpdate();
+      // manualUpdate();
+      autoUpdater.downloadUpdate(cancellationToken);
+
+      progressBar = new ProgressBar({
+        browserWindow: {
+          text: "Preparing data...",
+          title: "App Update",
+          webPreferences: {
+            nodeIntegration: true,
+          },
+        },
+      });
+
+      progressBar.detail = "Downloading in progress...";
     }
   });
 
@@ -79,35 +91,32 @@ autoUpdater.on("update-available", (info) => {
   // mainWindow.webContents.send("update_available");
 });
 
-// autoUpdater.on("download-progress", (progressObj) => {
-//   let log_message = "Download speed: " + progressObj.bytesPerSecond;
-//   log_message = log_message + " - Downloaded " + progressObj.percent + "%";
-//   log_message =
-//     log_message +
-//     " (" +
-//     progressObj.transferred +
-//     "/" +
-//     progressObj.total +
-//     ")";
-//   dialog.showMessageBox({
-//     message: log_message,
-//   });
-// });
+autoUpdater.on("download-progress", () => {
+  progressBar.on("aborted", function () {
+    cancellationToken.cancel();
+    console.info(`aborted...`);
+  });
+});
 
 autoUpdater.on("update-downloaded", () => {
+  progressBar.setCompleted();
+
+  progressBar.on("completed", function () {
+    console.info(`completed...`);
+    progressBar.detail = "Task completed. Exiting...";
+  });
+
   const options = {
     type: "question",
     title: "Restart App",
     message: `Do you want to restart now`,
     buttons: ["Restart", "Close"],
   };
-
   dialog.showMessageBox(options).then((result) => {
     if (result.response === 0) {
       autoUpdater.quitAndInstall();
     }
   });
-
   // dialog.showMessageBox({
   //   message: `update downloaded`,
   // });
