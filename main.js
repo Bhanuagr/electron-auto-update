@@ -1,9 +1,10 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { autoUpdater } = require("electron-updater");
+const { autoUpdater, CancellationToken } = require("electron-updater");
 const logger = require("electron-log");
 
 let mainWindow;
 autoUpdater.autoDownload = false;
+// const cancellationToken = new CancellationToken();
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -21,6 +22,10 @@ function createWindow() {
   mainWindow.once("ready-to-show", () => {
     autoUpdater.checkForUpdatesAndNotify();
   });
+}
+
+function manualUpdate() {
+  autoUpdater.downloadUpdate();
 }
 
 app.on("ready", () => {
@@ -54,6 +59,7 @@ autoUpdater.on("update-available", () => {
   dialog.showMessageBox({
     message: `update available`,
   });
+  manualUpdate();
   mainWindow.webContents.send("update_available");
 });
 
