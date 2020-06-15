@@ -58,24 +58,25 @@ ipcMain.on("restart_app", () => {
   autoUpdater.quitAndInstall();
 });
 
-autoUpdater.on("update-available", (info) => {
+autoUpdater.on("update-available", async (info) => {
   const options = {
     type: "question",
     title: "App Update",
     message: `Version: ${info.version}`,
     buttons: ["Upgrade now", "Ask me later"],
   };
-  dialog.showMessageBox(options, function (index) {
-    if (index === 0) {
-      dialog.showMessageBox({
-        message: `inside if block`,
-      });
-      manualUpdate();
-    }
-    dialog.showMessageBox({
-      message: `outside: ${JSON.stringify(index)}`,
-    });
+  const data = await dialog.showMessageBox(options);
+
+  dialog.showMessageBox({
+    message: `outside: ${JSON.stringify(data)}`,
   });
+
+  if (data.response === 0) {
+    dialog.showMessageBox({
+      message: `inside if block`,
+    });
+    manualUpdate();
+  }
 
   // dialog.showMessageBox({
   //   message: `update available`,
