@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { autoUpdater, CancellationToken } = require("electron-updater");
+const { autoUpdater } = require("electron-updater");
 const logger = require("electron-log");
 
 let mainWindow;
@@ -25,6 +25,9 @@ function createWindow() {
 }
 
 function manualUpdate() {
+  dialog.showMessageBox({
+    message: `manual updated started`,
+  });
   autoUpdater.downloadUpdate();
 }
 
