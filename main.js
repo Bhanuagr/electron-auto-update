@@ -65,18 +65,12 @@ autoUpdater.on("update-available", (info) => {
     message: `Version: ${info.version}`,
     buttons: ["Upgrade now", "Ask me later"],
   };
-  const index = dialog.showMessageBoxSync(options);
 
-  // dialog.showMessageBox({
-  //   message: `outside: ${JSON.stringify(data)}`,
-  // });
-
-  if (index === 0) {
-    // dialog.showMessageBox({
-    //   message: `inside if block`,
-    // });
-    manualUpdate();
-  }
+  dialog.showMessageBox(options).then((result) => {
+    if (result.response === 0) {
+      manualUpdate();
+    }
+  });
 
   // dialog.showMessageBox({
   //   message: `update available`,
