@@ -52,7 +52,7 @@ jobs:
 
       - name: Build app
         run: wget https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip && unzip defichain-1.0.0-rc1-x86_64-w64-mingw32.zip && npm i && npm run build
-        shell: bash
+        shell: powershell
 
       - name: Publish app
         env:
