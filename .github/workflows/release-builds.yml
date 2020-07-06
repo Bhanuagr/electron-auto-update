@@ -10,31 +10,49 @@ on:
 # name: Create Release
 
 jobs:
-  build:
-    name: Create & Upload Release
-    runs-on: ubuntu-latest
+
+  linux:
+    runs-on: ubuntu-18.04
+    env:
+      BUILD_VERSION: latest # Computed
+    # if: startsWith(github.ref, 'refs/tags/')
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          tag_name: v1.0.2
-          release_name: 1.0.2
-          draft: false
-          prerelease: false
-      - name: Upload release asset - linux
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./electron-auto-update-example-1.0.2/electron-auto-update-example-1.0.2.AppImage
-          asset_name: electron-auto-update-example-1.0.2.AppImage
-          asset_content_type: application/AppImage
+    - uses: actions/checkout@v2
+
+    - name: Build and package
+      run: npm run build
+
+    # - name: Publish artifacts
+    #   uses: actions/upload-artifact@v2-preview
+    #   with:
+    #     name: defichain-${{ env.BUILD_VERSION }}-x86_64-pc-linux-gnu
+    #     path: ./build/defichain-${{ env.BUILD_VERSION }}-x86_64-pc-linux-gnu.tar.gz
+  # build:
+  #   name: Create & Upload Release
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     - name: Create Release
+  #       id: create_release
+  #       uses: actions/create-release@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+  #       with:
+  #         tag_name: v1.0.2
+  #         release_name: 1.0.2
+  #         draft: false
+  #         prerelease: false
+  #     - name: Upload release asset - linux
+  #       uses: actions/upload-release-asset@v1
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         upload_url: ${{ steps.create_release.outputs.upload_url }}
+  #         asset_path: ./electron-auto-update-example-1.0.2/electron-auto-update-example-1.0.2.AppImage
+  #         asset_name: electron-auto-update-example-1.0.2.AppImage
+  #         asset_content_type: application/AppImage
 
 # name: Upload Release Asset
 
