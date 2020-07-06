@@ -10,39 +10,53 @@ on:
 # name: Create Release
 
 jobs:
-
   # linux:
   #   runs-on: ubuntu-18.04
   #   env:
   #     BUILD_VERSION: latest # Computed
-    
+
   #   steps:
   #   - uses: actions/checkout@v2
 
   #   - name: Build app
   #     run: npm i && npm run build
-    
+
   #   - name: Publish app
   #     env:
   #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
   #     run: npm run publish
-  
-  mac:
-    runs-on: macos-latest
+
+  # mac:
+  #   runs-on: macos-latest
+  #   env:
+  #     BUILD_VERSION: latest # Computed
+
+  #   steps:
+  #     - uses: actions/checkout@v2
+
+  #     - name: Build app
+  #       run: npm i && npm run build
+
+  #     - name: Publish app
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+  #       run: npm run publish
+
+  windows:
+    runs-on: windows-latest
     env:
       BUILD_VERSION: latest # Computed
-    
+
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Build app
-      run: npm i && npm run build
-    
-    - name: Publish app
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-      run: npm run publish
+      - name: Build app
+        run: npm i && npm run build
 
+      - name: Publish app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        run: npm run publish
     # - name: Publish artifacts
     #   uses: actions/upload-artifact@v2-preview
     #   with:
@@ -73,7 +87,6 @@ jobs:
   #         asset_path: ./electron-auto-update-example-1.0.2/electron-auto-update-example-1.0.2.AppImage
   #         asset_name: electron-auto-update-example-1.0.2.AppImage
   #         asset_content_type: application/AppImage
-
 # name: Upload Release Asset
 
 # jobs:
@@ -97,11 +110,11 @@ jobs:
 #           draft: false
 #           prerelease: false
 #       - name: Upload Release Asset
-#         id: upload-release-asset 
+#         id: upload-release-asset
 #         uses: actions/upload-release-asset@v1
 #         env:
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #         with:
-#           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+#           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
 #           asset_path: ./my-artifact.zip
 #           asset_name: my-artifact.zip
