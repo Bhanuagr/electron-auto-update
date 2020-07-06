@@ -20,8 +20,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build and package
+    - name: Build app
       run: npm i && npm run build
+    
+    - name: Publish app
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+      run: npm run publish
 
     # - name: Publish artifacts
     #   uses: actions/upload-artifact@v2-preview
