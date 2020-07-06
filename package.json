@@ -56,7 +56,8 @@
       "provider": "github",
       "repo": "electron-auto-update",
       "owner": "Bhanuagr",
-      "private": true
+      "private": true,
+      "releaseType": "release"
     }
   }
 }
