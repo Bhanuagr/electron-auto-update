@@ -52,7 +52,7 @@ jobs:
 
       - name: Build app
         run: |
-          sh pre-build-win.sh
+          ./pre-build-win.sh
           npm i
           npm run build
         shell: powershell
