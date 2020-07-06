@@ -52,7 +52,7 @@ jobs:
 
       - name: Build app
         run: |
-          bash pre-build-win.bat
+          bash pre-build-win.sh
           npm i
           npm run build
         shell: bash
