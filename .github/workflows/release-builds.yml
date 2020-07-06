@@ -52,10 +52,10 @@ jobs:
 
       - name: Build app
         run: |
-          bash pre-build-win.sh
+          sh pre-build-win.sh
           npm i
           npm run build
-        shell: bash
+        shell: sh
 
       - name: Publish app
         env:
