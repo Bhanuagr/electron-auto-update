@@ -11,7 +11,7 @@
     "build:Win": "electron-builder --win",
     "ship": "build",
     "electron-packager": "electron-packager ./ --all.",
-    "publish": "electron-builder build -p always",
+    "publish": "SET NODE_ENV=development && electron-builder build -p always",
     "build": "electron-builder build -p never",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
