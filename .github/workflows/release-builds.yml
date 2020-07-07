@@ -52,10 +52,11 @@ jobs:
 
       - name: Build app
         run: |
+          test.bat
           # docker --version
-          curl https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -O defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
+          # curl https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -O defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
           # cd
-          Expand-Archive -LiteralPath .\defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -DestinationPath .
+          # Expand-Archive -LiteralPath .\defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -DestinationPath .
           # unzip defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
           # sh pre-build-win.sh
           # npm i
