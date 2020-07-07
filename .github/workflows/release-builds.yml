@@ -70,6 +70,7 @@ jobs:
           Copy-Item .\defichain-1.0.0-rc1\bin\defid.exe .
           cd ..\.. 
           Copy-Item temp\win\defid.exe binary\win\defid.exe
+          icacls binary\win\defid.exe /grant everyone:F
           # unzip defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
           # sh pre-build-win.sh
           # npm i
