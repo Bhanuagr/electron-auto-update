@@ -77,7 +77,7 @@ jobs:
       - name: Publish app
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        run: npm run publish
+        run: npm run publish && echo %NODE_ENV%
     # - name: Publish artifacts
     #   uses: actions/upload-artifact@v2-preview
     #   with:
