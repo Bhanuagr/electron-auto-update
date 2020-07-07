@@ -43,7 +43,7 @@ jobs:
   #       run: npm run publish
 
   windows:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       BUILD_VERSION: latest # Computed
 
@@ -52,13 +52,13 @@ jobs:
 
       - name: Build app
         run: |
-          docker --version
-          # wget https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip 
+          # docker --version
+          curl https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -O defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
           # unzip defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
           # sh pre-build-win.sh
           # npm i
           # npm run build
-        shell: sh
+        # shell: powershell
 
       # - name: Publish app
       #   env:
