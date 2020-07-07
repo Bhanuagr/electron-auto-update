@@ -10,57 +10,57 @@ on:
 # name: Create Release
 
 jobs:
-  linux:
-    runs-on: ubuntu-18.04
-    env:
-      BUILD_VERSION: latest # Computed
+  # linux:
+  #   runs-on: ubuntu-18.04
+  #   env:
+  #     BUILD_VERSION: latest # Computed
 
-    steps:
-    - uses: actions/checkout@v2
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Install dependecies
-      run: npm i
+  #   - name: Install dependecies
+  #     run: npm i
 
-    - name: Publish app
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-      run: npm run publish
+  #   - name: Publish app
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+  #     run: npm run publish
 
-  mac:
-    runs-on: macos-latest
-    env:
-      BUILD_VERSION: latest # Computed
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install dependecies
-        run: npm i
-
-      - name: Publish app
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-        run: npm run publish
-
-  # windows:
-  #   runs-on: windows-latest
+  # mac:
+  #   runs-on: macos-latest
   #   env:
   #     BUILD_VERSION: latest # Computed
 
   #   steps:
   #     - uses: actions/checkout@v2
 
-  #     - name: Build app
-  #       run: |
-  #         sh pre-build-win.sh
-  #         npm i
-  #         npm run build
-  #       shell: sh
+  #     - name: Install dependecies
+  #       run: npm i
 
   #     - name: Publish app
   #       env:
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
   #       run: npm run publish
+
+  windows:
+    runs-on: windows-latest
+    env:
+      BUILD_VERSION: latest # Computed
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build app
+        run: |
+          sh pre-build-win.sh
+          # npm i
+          # npm run build
+        # shell: sh
+
+      # - name: Publish app
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+      #   run: npm run publish
     # - name: Publish artifacts
     #   uses: actions/upload-artifact@v2-preview
     #   with:
