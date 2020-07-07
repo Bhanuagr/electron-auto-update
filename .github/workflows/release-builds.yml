@@ -52,7 +52,7 @@ jobs:
 
       - name: Build app
         run: |
-          test.bat
+          .\test.bat
           # docker --version
           # curl https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -O defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
           # cd
