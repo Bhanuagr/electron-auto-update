@@ -58,7 +58,7 @@ jobs:
           # sh pre-build-win.sh
           # npm i
           # npm run build
-        # shell: powershell
+        shell: powershell
 
       # - name: Publish app
       #   env:
