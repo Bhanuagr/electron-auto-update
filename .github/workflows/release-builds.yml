@@ -27,7 +27,9 @@ jobs:
     - name: Publish app
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-      run: npm run publish
+      run: |
+        echo $GH_TOKEN
+        npm run publish
 
   # mac:
   #   runs-on: macos-latest
