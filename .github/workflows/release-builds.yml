@@ -29,6 +29,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
       run: |
         echo $GH_TOKEN
+        echo $BUILD_VERSION
         npm run publish
 
   # mac:
