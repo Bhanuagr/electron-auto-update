@@ -33,7 +33,7 @@ jobs:
     runs-on: macos-latest
     env:
       BUILD_VERSION: latest # Computed
-      CSC_IDENTITY_AUTO_DISCOVERY: false
+      # CSC_IDENTITY_AUTO_DISCOVERY: false
       CSC_LINK: ${{ secrets.CSC_LINK}}
       CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
 
