@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       BUILD_VERSION: latest # Computed
+      GH_TOKEN: ${{ secrets.GH_TOKEN}}
 
     steps:
     - uses: actions/checkout@v2
@@ -25,8 +26,8 @@ jobs:
       run: npm i
 
     - name: Publish app
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN}}
+      # env:
+      #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
       run: |
         echo $GH_TOKEN
         echo $BUILD_VERSION
