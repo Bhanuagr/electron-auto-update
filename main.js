@@ -127,7 +127,5 @@ autoUpdater.on("update-downloaded", () => {
 });
 
 autoUpdater.on("error", (error) => {
-  dialog.showMessageBox({
-    message: `error while updating ${error}`,
-  });
+  console.log(error);
 });
