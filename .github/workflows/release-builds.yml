@@ -54,7 +54,7 @@ on:
   #         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
   #       run: npm run publish
 
-  windows:
+  window_publish:
     runs-on: windows-latest
     env:
       BUILD_VERSION: latest # Computed
