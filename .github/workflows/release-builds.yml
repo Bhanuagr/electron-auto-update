@@ -13,25 +13,25 @@ on:
 # name: Create Release
 
 jobs:
-  linux:
-    runs-on: ubuntu-18.04
-    env:
-      BUILD_VERSION: latest # Computed
-      GH_TOKEN: ${{ secrets.GH_TOKEN}}
+  # linux:
+  #   runs-on: ubuntu-18.04
+  #   env:
+  #     BUILD_VERSION: latest # Computed
+  #     GH_TOKEN: ${{ secrets.GH_TOKEN}}
 
-    steps:
-    - uses: actions/checkout@v2
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Install dependecies
-      run: npm i
+  #   - name: Install dependecies
+  #     run: npm i
 
-    - name: Publish app
-      # env:
-      #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
-      run: |
-        echo $GH_TOKEN
-        echo $BUILD_VERSION
-        npm run publish
+  #   - name: Publish app
+  #     # env:
+  #     #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
+  #     run: |
+  #       echo $GH_TOKEN
+  #       echo $BUILD_VERSION
+  #       npm run publish
 
   # mac:
   #   runs-on: macos-latest
@@ -54,42 +54,42 @@ jobs:
   #         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
   #       run: npm run publish
 
-  # windows:
-  #   runs-on: windows-latest
-  #   env:
-  #     BUILD_VERSION: latest # Computed
+  windows:
+    runs-on: windows-latest
+    env:
+      BUILD_VERSION: latest # Computed
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Install dependecies
-  #       run: npm i
-  #     # - name: Build app
-  #     #   run: |
-  #     #     mkdir binary -ea 0
-  #     #     cd binary
-  #     #     rm -r -fo win, mac, linux -ErrorAction Ignore
-  #     #     mkdir win
-  #     #     cd ..
-  #     #     mkdir temp -ea 0
-  #     #     cd temp
-  #     #     rm -r -fo win -ErrorAction Ignore
-  #     #     mkdir win
-  #     #     cd win
-  #     #     curl https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -O defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
-  #     #     Expand-Archive -LiteralPath .\defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -DestinationPath .
-  #     #     Copy-Item .\defichain-1.0.0-rc1\bin\defid.exe .
-  #     #     cd ..\..
-  #     #     Copy-Item temp\win\defid.exe binary\win\defid.exe
-  #     #     icacls binary\win\defid.exe /grant everyone:F
-  #     #     # npm i
-  #     #     # npm run build
-  #     #   shell: powershell
+      - name: Install dependecies
+        run: npm i
+      # - name: Build app
+      #   run: |
+      #     mkdir binary -ea 0
+      #     cd binary
+      #     rm -r -fo win, mac, linux -ErrorAction Ignore
+      #     mkdir win
+      #     cd ..
+      #     mkdir temp -ea 0
+      #     cd temp
+      #     rm -r -fo win -ErrorAction Ignore
+      #     mkdir win
+      #     cd win
+      #     curl https://github.com/DeFiCh/ain/releases/download/v1.0.0-rc1/defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -O defichain-1.0.0-rc1-x86_64-w64-mingw32.zip
+      #     Expand-Archive -LiteralPath .\defichain-1.0.0-rc1-x86_64-w64-mingw32.zip -DestinationPath .
+      #     Copy-Item .\defichain-1.0.0-rc1\bin\defid.exe .
+      #     cd ..\..
+      #     Copy-Item temp\win\defid.exe binary\win\defid.exe
+      #     icacls binary\win\defid.exe /grant everyone:F
+      #     # npm i
+      #     # npm run build
+      #   shell: powershell
 
-  #     - name: Publish app
-  #       env:
-  #         GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-  #       run: npm run publish
+      - name: Publish app
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        run: npm run publish
     # - name: Publish artifacts
     #   uses: actions/upload-artifact@v2-preview
     #   with:

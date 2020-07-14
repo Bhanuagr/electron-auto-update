@@ -117,7 +117,7 @@ autoUpdater.on("update-downloaded", () => {
   dialog.showMessageBox(options).then((result) => {
     if (result.response === 0) {
       autoUpdater.quitAndInstall();
-      app.exit();
+      // app.exit();
     }
   });
   // dialog.showMessageBox({
