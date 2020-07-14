@@ -12,7 +12,7 @@ on:
 
 # name: Create Release
 
-# jobs:
+jobs:
 #   linux:
 #     runs-on: ubuntu-18.04
 #     env:
@@ -91,6 +91,8 @@ on:
         # env:
         #   GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
         run: npm run publish
+
+
     # - name: Publish artifacts
     #   uses: actions/upload-artifact@v2-preview
     #   with:
