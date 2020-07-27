@@ -116,7 +116,9 @@ autoUpdater.on("update-downloaded", () => {
   };
   dialog.showMessageBox(options).then((result) => {
     if (result.response === 0) {
-      autoUpdater.quitAndInstall();
+      setImmediate(() => {
+        autoUpdater.quitAndInstall();
+      });
       // app.exit();
     }
   });
