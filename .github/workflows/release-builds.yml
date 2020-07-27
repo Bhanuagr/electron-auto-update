@@ -13,25 +13,25 @@ on:
 # name: Create Release
 
 jobs:
-#   linux:
-#     runs-on: ubuntu-18.04
-#     env:
-#       BUILD_VERSION: latest # Computed
-#       GH_TOKEN: ${{ secrets.GH_TOKEN}}
+  linux:
+    runs-on: ubuntu-18.04
+    env:
+      BUILD_VERSION: latest # Computed
+      GH_TOKEN: ${{ secrets.GH_TOKEN}}
 
-#     steps:
-#     - uses: actions/checkout@v2
+    steps:
+    - uses: actions/checkout@v2
 
-#     - name: Install dependecies
-#       run: npm i
+    - name: Install dependecies
+      run: npm i
 
-#     - name: Publish app
-#       # env:
-#       #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
-#       run: |
-#         echo $GH_TOKEN
-#         echo $BUILD_VERSION
-#         npm run publish
+    - name: Publish app
+      # env:
+      #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
+      run: |
+        echo $GH_TOKEN
+        echo $BUILD_VERSION
+        npm run publish
 
   # mac:
   #   runs-on: macos-latest
