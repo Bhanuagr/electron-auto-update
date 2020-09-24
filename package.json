@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.8",
+  "version": "1.0.1",
   "description": "electron-auto-update-example",
   "main": "main.js",
   "scripts": {
@@ -60,11 +60,13 @@
     "win": {
       "target": "NSIS"
     },
-    "publish": {
-      "provider": "github",
-      "repo": "electron-release-example",
-      "owner": "Bhanuagr",
-      "releaseType": "release"
-    }
+    "publish": [
+      {
+        "provider": "github",
+        "repo": "electron-release-example",
+        "owner": "Bhanuagr",
+        "releaseType": "release"
+      }
+    ]
   }
 }
