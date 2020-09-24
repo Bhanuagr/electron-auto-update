@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "electron-auto-update-example",
   "main": "main.js",
   "scripts": {
@@ -62,10 +62,8 @@
     },
     "publish": [
       {
-        "provider": "github",
-        "repo": "electron-release-example",
-        "owner": "Bhanuagr",
-        "releaseType": "release"
+        "provider": "generic",
+        "url": "http://192.168.42.181:8000/"
       }
     ]
   }
