@@ -34,13 +34,9 @@ function manualUpdate() {
 app.on("ready", () => {
   createWindow();
 
-  const versionNumber = Number(version.slice(0, 1));
-
-  if (versionNumber === 1) {
-    autoUpdater.checkForUpdatesAndNotify().catch((e) => {
-      console.log(e);
-    });
-  }
+  autoUpdater.checkForUpdatesAndNotify().catch((e) => {
+    console.log(e);
+  });
   // autoUpdateConfig();
 });
 
@@ -72,24 +68,27 @@ autoUpdater.on("update-available", (info) => {
     buttons: ["Upgrade now", "Ask me later"],
   };
 
-  dialog.showMessageBox(options).then((result) => {
-    if (result.response === 0) {
-      // manualUpdate();
-      autoUpdater.downloadUpdate(cancellationToken);
+  const versionNumber = Number(version.slice(0, 1));
 
-      progressBar = new ProgressBar({
-        browserWindow: {
-          text: "Preparing data...",
-          title: "App Update",
-          webPreferences: {
-            nodeIntegration: true,
+  // if (versionNumber === 1)
+    dialog.showMessageBox(options).then((result) => {
+      if (result.response === 0) {
+        // manualUpdate();
+        autoUpdater.downloadUpdate(cancellationToken);
+
+        progressBar = new ProgressBar({
+          browserWindow: {
+            text: "Preparing data...",
+            title: "App Update",
+            webPreferences: {
+              nodeIntegration: true,
+            },
           },
-        },
-      });
+        });
 
-      progressBar.detail = "Downloading in progress...";
-    }
-  });
+        progressBar.detail = "Downloading in progress...";
+      }
+    });
 
   // dialog.showMessageBox({
   //   message: `update available`,

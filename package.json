@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "2.0.2",
+  "version": "2.0.1",
   "description": "electron-auto-update-example",
   "main": "main.js",
   "scripts": {
@@ -61,6 +61,10 @@
       "target": "NSIS"
     },
     "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080"
+      },
       {
         "provider": "github",
         "repo": "electron-release-example",
