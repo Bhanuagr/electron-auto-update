@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const { autoUpdater, CancellationToken } = require("electron-updater");
 const ProgressBar = require("electron-progressbar");
 const logger = require("electron-log");
+const { version } = require("./package.json");
 
 let mainWindow;
 let progressBar;
@@ -33,9 +34,13 @@ function manualUpdate() {
 app.on("ready", () => {
   createWindow();
 
-  autoUpdater.checkForUpdatesAndNotify().catch((e) => {
-    console.log(e);
-  });
+  const versionNumber = Number(version.slice(0, 1));
+
+  if (versionNumber === 1) {
+    autoUpdater.checkForUpdatesAndNotify().catch((e) => {
+      console.log(e);
+    });
+  }
   // autoUpdateConfig();
 });
 
@@ -116,8 +121,8 @@ autoUpdater.on("update-downloaded", () => {
   };
   dialog.showMessageBox(options).then((result) => {
     if (result.response === 0) {
-        autoUpdater.quitAndInstall();
-        app.exit();
+      autoUpdater.quitAndInstall();
+      app.exit();
     }
   });
   // dialog.showMessageBox({
