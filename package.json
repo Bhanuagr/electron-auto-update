@@ -157,8 +157,8 @@
     },
     "publish": {
       "provider": "github",
-      "repo": "defi-app",
-      "owner": "DeFiCh",
+      "repo": "electron-auto-update",
+      "owner": "Bhanuagr",
       "releaseType": "prerelease"
     }
   },
