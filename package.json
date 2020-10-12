@@ -60,17 +60,11 @@
     "win": {
       "target": "NSIS"
     },
-    "publish": [
-      {
-        "provider": "generic",
-        "url": "http://127.0.0.1:8080"
-      },
-      {
-        "provider": "github",
-        "repo": "electron-release-example",
-        "owner": "Bhanuagr",
-        "releaseType": "release"
-      }
-    ]
+    "publish": {
+      "provider": "github",
+      "repo": "electron-auto-update",
+      "owner": "Bhanuagr",
+      "releaseType": "draft"
+    }
   }
 }
