@@ -13,6 +13,7 @@
     "electron-packager": "electron-packager ./ --all.",
     "publish": "electron-builder build -p always",
     "build": "electron-builder build -p never",
+    "build:linux": "electron-builder --linux",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
