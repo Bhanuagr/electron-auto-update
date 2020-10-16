@@ -37,7 +37,11 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          path: dist/electron-auto-update-example-2.0.2.AppImage
+          title: builds
+            - files: [ dist/electron-auto-update-example-2.0.2.AppImage ]
+            - name: "linux-build"
+          # name: linux-build
+          # path: dist/electron-auto-update-example-2.0.2.AppImage
 
   # mac:
   #   runs-on: macos-latest
