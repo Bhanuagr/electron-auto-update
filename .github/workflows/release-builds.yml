@@ -13,53 +13,69 @@ on:
 # name: Create Release
 
 jobs:
-  linux:
-    runs-on: ubuntu-18.04
-    env:
-      BUILD_VERSION: latest # Computed
-      GH_TOKEN: ${{ secrets.GH_TOKEN}}
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Install dependecies
-        run: npm i
-  
-      - name: Build App
-        # env:
-        #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
-        run: |
-          npm run build:linux
-
-      # - run: mkdir -p path/to/artifact
-
-      # - run: echo hello > path/to/artifact/world.txt
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: linux-build
-          path: "dist/electron-auto-update-example-2.0.2.AppImage"
-
-  # mac:
-  #   runs-on: macos-latest
+  # linux:
+  #   runs-on: ubuntu-18.04
   #   env:
   #     BUILD_VERSION: latest # Computed
-  #     # CSC_IDENTITY_AUTO_DISCOVERY: false
-  #     CSC_LINK: ${{ secrets.CSC_LINK}}
-  #     CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
+  #     GH_TOKEN: ${{ secrets.GH_TOKEN}}
 
   #   steps:
   #     - uses: actions/checkout@v2
 
   #     - name: Install dependecies
   #       run: npm i
+  
+  #     - name: Build App
+  #       # env:
+  #       #   GH_TOKEN: ${{ secrets.GH_TOKEN}}
+  #       run: |
+  #         npm run build:linux
 
-  #     - name: Publish app
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-  #         CSC_LINK: ${{ secrets.CSC_LINK}}
-  #         CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
-  #       run: npm run publish
+  #     # - run: mkdir -p path/to/artifact
+
+  #     # - run: echo hello > path/to/artifact/world.txt
+
+  #     - uses: actions/upload-artifact@v2
+  #       with:
+  #         name: linux-build
+  #         path: "dist/electron-auto-update-example-2.0.2.AppImage"
+
+  mac:
+    runs-on: macos-latest
+    env:
+      BUILD_VERSION: latest # Computed
+      # CSC_IDENTITY_AUTO_DISCOVERY: false
+      CSC_LINK: ${{ secrets.CSC_LINK}}
+      CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependecies
+        run: npm i
+
+      - name: Publish app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          CSC_LINK: ${{ secrets.CSC_LINK}}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
+        run: npm run publish
+      
+      # - name: Delete old release assets
+      #   uses: mknejp/delete-release-assets@v1
+      #   with:
+      #     token: ${{ secrets.GH_TOKEN }}
+      #     # tag: staging # This may also be of the form 'refs/tags/staging'
+
+      #     # Pick one of:
+      #     # 1. a single file name
+      #     # assets: changelog.txt
+      #     # 2. a glob pattern (note the quotes if it begins with *)
+      #     assets: '*.zip'
+          # 3. multiple names/globs, one per line
+          # assets: | 
+          #   changelog.txt
+          #   *.zip
 
   # window_publish:
   #   runs-on: windows-latest
