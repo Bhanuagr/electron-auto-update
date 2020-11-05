@@ -65,7 +65,7 @@ jobs:
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ secrets.GH_TOKEN }}
-          # tag: staging # This may also be of the form 'refs/tags/staging'
+          tag: v2.0.2 # This may also be of the form 'refs/tags/staging'
 
           # Pick one of:
           # 1. a single file name
