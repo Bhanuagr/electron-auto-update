@@ -61,17 +61,24 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD}}
         run: npm run publish
       
-      # - name: Delete mac zip file
-      #   uses: mknejp/delete-release-assets@v1
-      #   with:
-      #     token: ${{ secrets.GH_TOKEN }}
-      #     tag: v2.0.2 # This may also be of the form 'refs/tags/staging'
+      - name: Read package.json
+        uses: tyankatsu0105/read-package-version-actions@v1
+        id: package-version
+      
+      - name: Show version number
+        run: echo "Version is ${{ steps.package-version.outputs.version }}"
+        
+      - name: Delete mac zip file
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          tag: ${{ steps.package-version.outputs.version }} # This may also be of the form 'refs/tags/staging'
 
-      #     # Pick one of:
-      #     # 1. a single file name
-      #     # assets: changelog.txt
-      #     # 2. a glob pattern (note the quotes if it begins with *)
-      #     assets: '*mac.zip'
+          # Pick one of:
+          # 1. a single file name
+          # assets: changelog.txt
+          # 2. a glob pattern (note the quotes if it begins with *)
+          assets: '*mac.zip'
           # 3. multiple names/globs, one per line
           # assets: | 
           #   changelog.txt
